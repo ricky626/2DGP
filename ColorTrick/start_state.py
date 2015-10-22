@@ -1,7 +1,7 @@
 import game_framework
 import main_state
 
-from pico2d import *
+from My_pico2d import *
 
 name = "StartState"
 image = None

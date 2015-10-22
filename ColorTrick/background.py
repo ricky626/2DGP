@@ -1,7 +1,7 @@
 import game_framework
 import random
 
-from pico2d import *
+from My_pico2d import *
 
 name = "Background"
 background = None
