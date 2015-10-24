@@ -205,7 +205,7 @@ class Image:
         """Rotate(in radian unit) and draw image to back buffer"""
         if w == None and h == None:
             w,h = self.w, self.h
-        rect = to_sdl_rect(x-w/2, y-h/2, w, h)
+        rect = to_sdl_rect(x, y, w, h)
         SDL_RenderCopyEx(renderer, self.texture, None, rect, math.degrees(-rad), None, SDL_FLIP_NONE);
 
     def draw(self, x, y, w=None, h=None):

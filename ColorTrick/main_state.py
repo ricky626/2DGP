@@ -8,29 +8,31 @@ from map import Map
 
 
 
-name = "MainState"
+name        = "MainState"
 
-hero = None
-background = None
-map = None
-running = True
+hero        = None
+background  = None
+map         = None
 
 
 def enter():
     global background, map
-    background = Background()
-    map = Map()
+
+    background          = Background()
+    map                 = Map()
     pass
 
 def exit():
     global background, map
+
+    del(background)
     del(map)
     pass
 
 def update():
     background.update()
     map.update()
-    delay(0.05)
+    delay(0.025)
     pass
 
 def draw():
@@ -49,7 +51,7 @@ def handle_events():
 
 def main():
     enter()
-    while (running):
+    while (1):
         handle_events()
         update()
         draw()
