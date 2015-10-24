@@ -3,13 +3,11 @@ import random
 
 from My_pico2d import *
 
-name = "Background"
+name = "Hero"
 
+class Hero:
 
-class Background:
-    background = None
     def __init__(self):
-
         self.ScreenSizeX = 2048
         self.ScreenSizeY = 1536
 
@@ -37,7 +35,7 @@ class Background:
                 self.moveX[i][j], self.moveY[i][j] = random.randint(1, 3), random.randint(1, 3)
 
 
-        if(Background.background == None):
+        if(self.background == None):
             self.background = load_image("res/background.png")
         pass
 
@@ -49,19 +47,22 @@ class Background:
         pass
     pass
 
-
-
 def enter():
+    global background
+    background = Background()
     pass
 
 def exit():
+    global background
+    del(background)
     pass
 
 def update():
     pass
 
 def draw():
-    pass
+    clear_canvas()
+    update_canvas()
 
 
 def handle_events():
