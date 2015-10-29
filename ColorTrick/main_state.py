@@ -21,7 +21,7 @@ def enter():
 
     background          = Background()
     map                 = Map()
-  #  hero                = Hero()
+    hero                = Hero()
     pass
 
 def exit():
@@ -29,19 +29,21 @@ def exit():
 
     del(background)
     del(map)
-#    del(hero)
+    del(hero)
     pass
 
 def update():
     background.update()
+    hero.update()
     map.update()
-    delay(0.015)
+    delay(0.020)
     pass
 
 def draw():
     clear_canvas()
     background.draw()
     map.draw()
+    hero.draw()
     update_canvas()
 
 def handle_events():
@@ -50,6 +52,8 @@ def handle_events():
     for event in events:
         if event.type == SDL_QUIT:
             game_framework.quit()
+        hero.handle_events(event)
+
 
 
 def main():

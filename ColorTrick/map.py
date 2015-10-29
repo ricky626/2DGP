@@ -43,7 +43,7 @@ class Map:
         self.LoadMap()
 
         if(Map.hero == None):
-            self.hero       = load_image("res/hero/right_stand.png")
+            #self.hero       = load_image("res/hero/right_stand.png")
             self.flag       = load_image("res/hero/flag1.png")
             self.black      = load_image("res/block/black.png")
             self.red        = load_image("res/block/red.png")
@@ -118,7 +118,7 @@ class Map:
                 if(self.object[i][j] == 4): self.blue.draw(self.objectX[i][j], self.objectY[i][j])
                 if(self.object[i][j] == 5): self.purple.draw(self.objectX[i][j], self.objectY[i][j])
                 if(self.object[i][j] == 6): self.black.draw(self.objectX[i][j], self.objectY[i][j])
-                if(self.object[i][j] == 7): self.hero.draw(self.HeroX, self.HeroY)
+                #if(self.object[i][j] == 7): self.hero.draw(self.HeroX, self.HeroY)
                 if(self.object[i][j] == 8): self.flag.draw(self.objectX[i][j], self.objectY[i][j])
                 if(self.object[i][j] == 9): self.dot_red.clip_draw(self.dot_frames * 64, 0, 64, 64, self.objectX[i][j], self.objectY[i][j])
                 if(self.object[i][j] == 10):self.dot_yellow.clip_draw(self.dot_frames * 64, 0, 64, 64, self.objectX[i][j], self.objectY[i][j])

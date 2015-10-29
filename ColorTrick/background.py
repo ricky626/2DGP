@@ -21,6 +21,7 @@ class Background:
         self.yut                    = "res/yut/yut-.png"
 
         self.rotateTime             = SDL_GetTicks()
+        self.moveTime               = SDL_GetTicks()
         self.PolygonDegree          = 0
         self.PolygonX               = [[0 for j in range(0, 5)] for i in range(0, 5)]
         self.PolygonY               = [[0 for j in range(0, 5)] for i in range(0, 5)]
@@ -31,7 +32,7 @@ class Background:
             for j in range(0, 5):
                 #self.PolygonX[i][j], self.PolygonY[i][j]    = random.randint(-self.ScreenSizeX/2, self.ScreenSizeX + 500), random.randint(-self.ScreenSizeY/2, self.ScreenSizeY + 500)
                 self.PolygonX[i][j], self.PolygonY[i][j]    = self.ScreenSizeX/2-160, self.ScreenSizeY/2-130
-                self.moveX[i][j], self.moveY[i][j]          = random.randint(-5, 5), random.randint(-5, 5)
+                self.moveX[i][j], self.moveY[i][j]          = random.randint(-7, 7), random.randint(-7, 7)
 
 
         if(Background.background == None):
@@ -47,17 +48,19 @@ class Background:
         pass
 
     def update(self):
-        for i in range(0, 5):
-            for j in range(0, 5):
-                if(self.PolygonX[i][j] > self.ScreenSizeX+100 or self.PolygonX[i][j] < -self.ScreenSizeX+400):
-                    self.moveX[i][j] *= -1
-                elif(self.PolygonY[i][j] > self.ScreenSizeY+100 or self.PolygonY[i][j] < -self.ScreenSizeY+400):
-                    self.moveY[i][j] *= -1
+        if(SDL_GetTicks() - self.moveTime > 10):
+            for i in range(0, 5):
+                for j in range(0, 5):
+                    if(self.PolygonX[i][j] > self.ScreenSizeX+100 or self.PolygonX[i][j] < -self.ScreenSizeX+400):
+                        self.moveX[i][j] *= -1
+                    elif(self.PolygonY[i][j] > self.ScreenSizeY+100 or self.PolygonY[i][j] < -self.ScreenSizeY+400):
+                        self.moveY[i][j] *= -1
 
-                self.PolygonX[i][j] += self.moveX[i][j]
-                self.PolygonY[i][j] += self.moveY[i][j]
+                    self.PolygonX[i][j] += self.moveX[i][j]
+                    self.PolygonY[i][j] += self.moveY[i][j]
+            self.moveTime = SDL_GetTicks()
 
-        if(SDL_GetTicks() - self.rotateTime > 50):
+        if(SDL_GetTicks() - self.rotateTime > 30):
             self.PolygonDegree += 0.02
             self.rotateTime = SDL_GetTicks()
         pass
