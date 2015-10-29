@@ -31,7 +31,7 @@ class Background:
             for j in range(0, 5):
                 #self.PolygonX[i][j], self.PolygonY[i][j]    = random.randint(-self.ScreenSizeX/2, self.ScreenSizeX + 500), random.randint(-self.ScreenSizeY/2, self.ScreenSizeY + 500)
                 self.PolygonX[i][j], self.PolygonY[i][j]    = self.ScreenSizeX/2-160, self.ScreenSizeY/2-130
-                self.moveX[i][j], self.moveY[i][j]          = random.randint(-7, 7), random.randint(-7, 7)
+                self.moveX[i][j], self.moveY[i][j]          = random.randint(-5, 5), random.randint(-5, 5)
 
 
         if(Background.background == None):
@@ -57,7 +57,7 @@ class Background:
                 self.PolygonX[i][j] += self.moveX[i][j]
                 self.PolygonY[i][j] += self.moveY[i][j]
 
-        if(SDL_GetTicks() - self.rotateTime > 20):
+        if(SDL_GetTicks() - self.rotateTime > 50):
             self.PolygonDegree += 0.02
             self.rotateTime = SDL_GetTicks()
         pass

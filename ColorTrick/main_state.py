@@ -5,6 +5,7 @@ from My_pico2d import *
 import game_framework
 from background import Background
 from map import Map
+from hero import Hero
 
 
 
@@ -16,23 +17,25 @@ map         = None
 
 
 def enter():
-    global background, map
+    global background, map, hero
 
     background          = Background()
     map                 = Map()
+  #  hero                = Hero()
     pass
 
 def exit():
-    global background, map
+    global background, map, hero
 
     del(background)
     del(map)
+#    del(hero)
     pass
 
 def update():
     background.update()
     map.update()
-    delay(0.025)
+    delay(0.015)
     pass
 
 def draw():

@@ -80,11 +80,13 @@ class Map:
                     if(self.object[i][j] == 7):
                         self.objectX[i][j] += 7
                         self.objectY[i][j] += 10
+                        self.HeroX = self.objectX[i][j]
+                        self.HeroY = self.objectY[i][j]
 
                     for k in range(9, 14):
                         if(self.object[i][j] == k):
-                            #self.objectX[i][j] += 12
-                            #self.objectY[i][j] += 64
+                            self.objectX[i][j] += 12
+                            self.objectY[i][j] += 64
 
                             break
 
@@ -116,7 +118,7 @@ class Map:
                 if(self.object[i][j] == 4): self.blue.draw(self.objectX[i][j], self.objectY[i][j])
                 if(self.object[i][j] == 5): self.purple.draw(self.objectX[i][j], self.objectY[i][j])
                 if(self.object[i][j] == 6): self.black.draw(self.objectX[i][j], self.objectY[i][j])
-                if(self.object[i][j] == 7): self.hero.draw(self.objectX[i][j], self.objectY[i][j])
+                if(self.object[i][j] == 7): self.hero.draw(self.HeroX, self.HeroY)
                 if(self.object[i][j] == 8): self.flag.draw(self.objectX[i][j], self.objectY[i][j])
                 if(self.object[i][j] == 9): self.dot_red.clip_draw(self.dot_frames * 64, 0, 64, 64, self.objectX[i][j], self.objectY[i][j])
                 if(self.object[i][j] == 10):self.dot_yellow.clip_draw(self.dot_frames * 64, 0, 64, 64, self.objectX[i][j], self.objectY[i][j])
