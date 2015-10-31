@@ -12,6 +12,10 @@ map = None
 class Hero:
     left_stand = None
     right_stand = None
+    left_run = None
+    right_run = None
+    left_jump = None
+    right_jump = None
 
     def __init__(self):
         map = Map()
@@ -39,8 +43,13 @@ class Hero:
         pass
 
     def update(self):
-        if(self.m_CharState == 1 or self.m_CharState == 2):
+        if(self.m_CharState == 1):
+            self.HeroX -= 4
             self.run_frames = (self.run_frames + 1) % 4
+        if(self.m_CharState == 2):
+            self.HeroX += 4
+            self.run_frames = (self.run_frames + 1) % 4
+
         elif(self.m_CharState == 5 or self.m_CharState == 6):
             self.jump_frames = (self.jump_frames + 1) % 3
 
