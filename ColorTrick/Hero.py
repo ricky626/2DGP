@@ -94,6 +94,9 @@ class Hero:
                     self.m_CharState = 2
                 elif(self.m_Movestate > 0 and self.m_CharState == 5):
                     self.m_CharState = 6
+
+            if event.key == SDLK_SPACE:
+                pass
             pass
 
         elif(event.type == SDL_KEYUP):

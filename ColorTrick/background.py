@@ -60,7 +60,7 @@ class Background:
                     self.PolygonY[i][j] += self.moveY[i][j]
             self.moveTime = SDL_GetTicks()
 
-        if(SDL_GetTicks() - self.rotateTime > 30):
+        if(SDL_GetTicks() - self.rotateTime > 15):
             self.PolygonDegree += 0.02
             self.rotateTime = SDL_GetTicks()
         pass
