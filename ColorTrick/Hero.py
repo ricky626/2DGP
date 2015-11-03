@@ -31,8 +31,6 @@ class Hero:
         self.m_Movestate = 0
 
 
-
-
         if(Hero.left_stand == None):
             self.left_run           = load_image("res/hero/left_run.png")
             self.right_run          = load_image("res/hero/right_run.png")

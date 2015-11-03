@@ -31,7 +31,7 @@ def update():
             frames = (frames + 1) % 2
             Timer = SDL_GetTicks()
     background.update()
-
+    delay(0.015)
 
 def draw():
     global image
@@ -39,7 +39,7 @@ def draw():
     background.draw()
     image.clip_draw(frames * 716, 0, 716, 303, 150, 75)
     update_canvas()
-    delay(0.025)
+
 
 def handle_events():
     events = get_events()

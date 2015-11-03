@@ -68,7 +68,6 @@ class Map:
             self.purple_on  = load_image("res/switch/purple_on.png")
             self.purple_off = load_image("res/switch/purple_off.png")
 
-
             self.objectX    = [[0 for row in range(0, 16)] for col in range(0, 12)]
             self.objectY    = [[0 for row in range(0, 16)] for col in range(0, 12)]
 

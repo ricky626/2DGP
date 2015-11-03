@@ -32,7 +32,7 @@ class Background:
             for j in range(0, 5):
                 #self.PolygonX[i][j], self.PolygonY[i][j]    = random.randint(-self.ScreenSizeX/2, self.ScreenSizeX + 500), random.randint(-self.ScreenSizeY/2, self.ScreenSizeY + 500)
                 self.PolygonX[i][j], self.PolygonY[i][j]    = self.ScreenSizeX/2-160, self.ScreenSizeY/2-130
-                self.moveX[i][j], self.moveY[i][j]          = random.randint(-7, 7), random.randint(-7, 7)
+                self.moveX[i][j], self.moveY[i][j]          = random.randint(-4, 4), random.randint(-4, 4)
 
 
         if(Background.background == None):

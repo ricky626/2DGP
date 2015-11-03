@@ -8,13 +8,11 @@ from map import Map
 from hero import Hero
 
 
-
 name        = "MainState"
 
 hero        = None
 background  = None
 map         = None
-
 
 def enter():
     global background, map, hero
