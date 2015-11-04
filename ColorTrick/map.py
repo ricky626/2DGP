@@ -54,7 +54,7 @@ class Map:
 
                     if(self.object[i][j] == 7):
                         self.objectX[i][j] += 7
-                        self.objectY[i][j] += 10
+                        #self.objectY[i][j] += 10
                         self.HeroX = self.objectX[i][j]
                         self.HeroY = self.objectY[i][j]
 
