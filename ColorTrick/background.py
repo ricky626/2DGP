@@ -12,8 +12,8 @@ class Background:
 
     def __init__(self):
 
-        self.ScreenSizeX            = 1024
-        self.ScreenSizeY            = 768
+        self.screenSizeX            = 1024
+        self.screenSizeY            = 768
         self.rect                   = "res/rect/rect-.png"
         self.tr                     = "res/tr/tr-.png"
         self.cir                    = "res/cir/cir-.png"
@@ -31,12 +31,12 @@ class Background:
         for i in range(0, 5):
             for j in range(0, 5):
                 #self.PolygonX[i][j], self.PolygonY[i][j]    = random.randint(-self.ScreenSizeX/2, self.ScreenSizeX + 500), random.randint(-self.ScreenSizeY/2, self.ScreenSizeY + 500)
-                self.PolygonX[i][j], self.PolygonY[i][j]    = self.ScreenSizeX/2-160, self.ScreenSizeY/2-130
-                self.moveX[i][j], self.moveY[i][j]          = random.randint(-4, 4), random.randint(-4, 4)
+                self.PolygonX[i][j], self.PolygonY[i][j] = self.screenSizeX/2-160, self.screenSizeY/2-130
+                self.moveX[i][j], self.moveY[i][j] = random.randint(-4, 4), random.randint(-4, 4)
 
 
         if(Background.background == None):
-            self.background       = load_image("res/background.png")
+            self.background = load_image("res/background.png")
 
             for i in range(0, 5):
                self.Polygon[0][i] = load_image(self.rect.replace('-', str(i+1)))
@@ -51,9 +51,9 @@ class Background:
         if(SDL_GetTicks() - self.moveTime > 10):
             for i in range(0, 5):
                 for j in range(0, 5):
-                    if(self.PolygonX[i][j] > self.ScreenSizeX+100 or self.PolygonX[i][j] < -self.ScreenSizeX+400):
+                    if(self.PolygonX[i][j] > self.screenSizeX+100 or self.PolygonX[i][j] < -self.screenSizeX+400):
                         self.moveX[i][j] *= -1
-                    elif(self.PolygonY[i][j] > self.ScreenSizeY+100 or self.PolygonY[i][j] < -self.ScreenSizeY+400):
+                    elif(self.PolygonY[i][j] > self.screenSizeY+100 or self.PolygonY[i][j] < -self.screenSizeY+400):
                         self.moveY[i][j] *= -1
 
                     self.PolygonX[i][j] += self.moveX[i][j]

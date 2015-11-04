@@ -8,30 +8,6 @@ map                         = None
 
 class Map:
     hero                    = None
-    flag                    = None
-
-    black                   = None
-    red                     = None
-    yellow                  = None
-    green                   = None
-    blue                    = None
-    purple                  = None
-    dot_red                 = None
-    dot_yellow              = None
-    dot_green               = None
-    dot_blue                = None
-    dot_purple              = None
-    red_on                  = None
-    red_off                 = None
-    yellow_on               = None
-    yellow_off              = None
-    green_on                = None
-    green_off               = None
-    blue_on                 = None
-    blue_off                = None
-    purple_on               = None
-    purple_off              = None
-
 
     def __init__(self):
         self.m_nStage       = 1
@@ -40,7 +16,7 @@ class Map:
         self.name           = "res/Stage/Stage-.txt"
         self.dotTime        = SDL_GetTicks()
 
-        self.LoadMap()
+        self.LoadMap(self.m_nStage)
 
         if(Map.hero == None):
             #self.hero       = load_image("res/hero/right_stand.png")
@@ -93,12 +69,12 @@ class Map:
 
         pass
 
-    def LoadMap(self):
-        f = open(self.name.replace('-', str(self.m_nStage)), 'r')
+    def LoadMap(self, m_nStage):
+        f = open(self.name.replace('-', str(m_nStage)), 'r')
 
         for col in range(0, 12):
-	        for row in range(0, 16):
-		        self.object[col][row] = int(f.read(3).strip())
+            for row in range(0, 16):
+                self.object[col][row] = int(f.read(3).strip())
         f.close()
         pass
 
@@ -111,6 +87,7 @@ class Map:
     def draw(self):
         for i in range(0, 12):
             for j in range(0, 16):
+
                 if(self.object[i][j] == 1): self.red.draw(self.objectX[i][j], self.objectY[i][j])
                 if(self.object[i][j] == 2): self.yellow.draw(self.objectX[i][j], self.objectY[i][j])
                 if(self.object[i][j] == 3): self.green.draw(self.objectX[i][j], self.objectY[i][j])
@@ -125,11 +102,11 @@ class Map:
                 if(self.object[i][j] == 12):self.dot_blue.clip_draw(self.dot_frames * 64, 0, 64, 64, self.objectX[i][j], self.objectY[i][j])
                 if(self.object[i][j] == 13):self.dot_purple.clip_draw(self.dot_frames * 64, 0, 64, 64, self.objectX[i][j], self.objectY[i][j])
 
-                if(self.object[i][j] == 14): self.red_off.draw(j * 64 + 12, self.objectY[i][j] + 27)
-                if(self.object[i][j] == 15): self.yellow_off.draw(j * 64 + 12, self.objectY[i][j] + 27)
-                if(self.object[i][j] == 16): self.green_off.draw(j * 64 + 12, self.objectY[i][j] + 27)
-                if(self.object[i][j] == 17): self.blue_off.draw(j * 64 + 12, self.objectY[i][j] + 27)
-                if(self.object[i][j] == 18): self.purple_off.draw(j * 64 + 12, self.objectY[i][j] + 27)
+                if(self.object[i][j] == 14): self.red_off.draw(self.objectX[i][j]  + 12, self.objectY[i][j] + 27)
+                if(self.object[i][j] == 15): self.yellow_off.draw(self.objectX[i][j] + 12, self.objectY[i][j] + 27)
+                if(self.object[i][j] == 16): self.green_off.draw(self.objectX[i][j] + 12, self.objectY[i][j] + 27)
+                if(self.object[i][j] == 17): self.blue_off.draw(self.objectX[i][j] + 12, self.objectY[i][j] + 27)
+                if(self.object[i][j] == 18): self.purple_off.draw(self.objectX[i][j] + 12, self.objectY[i][j] + 27)
 
 
         pass
