@@ -19,8 +19,11 @@ class Hero:
 
         self.moveTime = SDL_GetTicks()
 
+        self.LEFT_RUN, RIGHT_RUN, LEFT_STAND, self.RIGHT_STAND, LEFT_JUMP, RIGHT_JUMP = range(1, 7)
+
         self.m_CharState = 4              # 1 : Left Run # 2 : Right Run # 3: Left Stand # 4 : Right Stand # 5 : Left Jump # 6 : Right Jump
-        self.m_Movestate = 0
+
+        self.m_Movestate = 0 # 0: default 1: air 2 : jump
         self.m_nSwitchNo = 0
         self.m_nDropSpeed = 10
         self.m_JTime = -1
@@ -50,13 +53,13 @@ class Hero:
         for i in range(0, 12):
             for j in range(0, 16):
                 if(self.map.object[i][j] == 0): continue
-                if(self.map.object[i][j] != (1, 2, 3, 4, 5, 6)):
+                if(self.map.object[i][j] in [1, 2, 3, 4, 5, 6]):
                     if(self.map.objectX[i][j]/64 == XTile and self.map.objectY[i][j]/64 == YTile): return 1
 
-                elif(self.map.object[i][j] == (14, 15, 16, 17, 18)): #스위치이면 #꺼진거만 함
-                    if(self.map.objectX[i][j] == XTile and self.map.objectY[i][j] == YTile):
-                        tmpX = self.map.objectX[i][j]
-                        tmpY = self.map.objectY[i][j]
+                #elif(self.map.object[i][j] == (14, 15, 16, 17, 18)): #스위치이면 #꺼진거만 함
+                #    if(self.map.objectX[i][j] == XTile and self.map.objectY[i][j] == YTile):
+                #        tmpX = self.map.objectX[i][j]
+                #        tmpY = self.map.objectY[i][j]
 
                     #if(m_Object[i][5] == 1)#켜진 스위치이면
                         #tmpMX = 42
@@ -96,7 +99,7 @@ class Hero:
                 self.run_frames = (self.run_frames + 1) % 4
                 self.moveTime = SDL_GetTicks()
 
-        if(self.rightbutton == True):
+        elif(self.rightbutton == True):
             if(self.m_Movestate == 0):
                 self.m_CharState = 2
             elif(self.m_Movestate > 0 and self.m_CharState == 5):
@@ -116,20 +119,21 @@ class Hero:
             if(self.m_Movestate == 0):
                 if(self.m_CharState == 1 or self.m_CharState == 5):
                     self.m_CharState = 3
-                elif(self.m_CharState == 2 or self.m_CharState == 6):
+                if(self.m_CharState == 2 or self.m_CharState == 6):
                     self.m_CharState = 4
 
         if(self.jumpbutton == True):
             if(self.GetCharCrash(self.HeroX, self.HeroY - 10, 0) == 0):
-                if(self.m_MoveState == 0):
-                    if(self.m_JTime <= 0):
-                        self.m_JTime = 25
-                        self.m_Movestate = 1
+                if(self.m_CharState != 5 and self.m_CharState != 6):
+                    if(self.m_MoveState == 0):
+                        if(self.m_JTime <= 0):
+                            self.m_JTime = 25
+                            self.m_Movestate = 1
 
-                    if(self.m_CharState == 1 or self.m_CharState == 3):
-                        self.m_CharState = 5
-                    elif(self.m_CharState == 2 or self.m_CharState == 4):
-                        self.m_CharState = 6
+                        if(self.m_CharState == 1 or self.m_CharState == 3):
+                            self.m_CharState = 5
+                        elif(self.m_CharState == 2 or self.m_CharState == 4):
+                            self.m_CharState = 6
 
         if(self.m_CharState == 5 or self.m_CharState == 6):
             self.jump_frames = (self.jump_frames + 1) % 3
@@ -148,7 +152,7 @@ class Hero:
 
 
         elif(self.m_JTime == 0):
-            self.m_JTime = 0
+            #self.m_JTime = 0
             self.m_Movestate = 2
 
         if(self.HeroX < 0):
@@ -160,10 +164,12 @@ class Hero:
             if(self.GetCharCrash(self.HeroX, self.HeroY + (self.m_nDropSpeed / 10) * 2 + 48, 0) == 0):
                 self.HeroY += self.m_nDropSpeed / 10 * 2
                 self.m_nDropSpeed += 1
-            else:
+            else:#######################
                 self.m_nDropSpeed = 10
                 self.m_MoveState = 0
+                self.m_CharState = 4
 
+        print(self.m_CharState)
         pass
 
     def draw(self):
@@ -193,17 +199,17 @@ class Hero:
                 self.rightbutton = True
                 pass
 
-            if event.key == SDLK_SPACE and self.m_CharState != 5 and self.m_CharState != 6:
+            if event.key == SDLK_SPACE and (self.m_CharState != 5 or self.m_CharState != 6):# and (self.m_CharState != 5 or self.m_CharState != 6):
                 self.jumpbutton = True
 
                 pass
 
         elif(event.type == SDL_KEYUP):
-            if(event.key == SDLK_LEFT):
+            if(event.key == SDLK_LEFT) and self.leftbutton == True:
                 self.leftbutton = False
-            if(event.key == SDLK_RIGHT):
+            if(event.key == SDLK_RIGHT) and self.rightbutton == True:
                 self.rightbutton = False
-            if(event.key == SDLK_SPACE):
+            if(event.key == SDLK_SPACE) and self.jumpbutton == True:
                 self.jumpbutton = False
             pass
 

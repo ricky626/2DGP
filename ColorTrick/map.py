@@ -58,15 +58,10 @@ class Map:
                         self.HeroX = self.objectX[i][j]
                         self.HeroY = self.objectY[i][j]
 
-                    for k in range(9, 14):
-                        if(self.object[i][j] == k):
-                            self.objectX[i][j] += 12
-                            self.objectY[i][j] += 64
 
-                            break
-
-
-
+                    if(self.object[i][j] in range(14, 19)):
+                        self.objectX[i][j] += 12
+                        self.objectY[i][j] += 28
         pass
 
     def LoadMap(self, m_nStage):
@@ -102,11 +97,11 @@ class Map:
                 if(self.object[i][j] == 12):self.dot_blue.clip_draw(self.dot_frames * 64, 0, 64, 64, self.objectX[i][j], self.objectY[i][j])
                 if(self.object[i][j] == 13):self.dot_purple.clip_draw(self.dot_frames * 64, 0, 64, 64, self.objectX[i][j], self.objectY[i][j])
 
-                if(self.object[i][j] == 14): self.red_off.draw(self.objectX[i][j]  + 12, self.objectY[i][j] + 27)
-                if(self.object[i][j] == 15): self.yellow_off.draw(self.objectX[i][j] + 12, self.objectY[i][j] + 27)
-                if(self.object[i][j] == 16): self.green_off.draw(self.objectX[i][j] + 12, self.objectY[i][j] + 27)
-                if(self.object[i][j] == 17): self.blue_off.draw(self.objectX[i][j] + 12, self.objectY[i][j] + 27)
-                if(self.object[i][j] == 18): self.purple_off.draw(self.objectX[i][j] + 12, self.objectY[i][j] + 27)
+                if(self.object[i][j] == 14): self.red_off.draw(self.objectX[i][j], self.objectY[i][j])
+                if(self.object[i][j] == 15): self.yellow_off.draw(self.objectX[i][j], self.objectY[i][j])
+                if(self.object[i][j] == 16): self.green_off.draw(self.objectX[i][j], self.objectY[i][j])
+                if(self.object[i][j] == 17): self.blue_off.draw(self.objectX[i][j], self.objectY[i][j])
+                if(self.object[i][j] == 18): self.purple_off.draw(self.objectX[i][j], self.objectY[i][j])
 
 
         pass
