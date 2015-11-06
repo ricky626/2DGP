@@ -49,7 +49,7 @@
         <entry file="file://$PROJECT_DIR$/main_state.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="46" column="20" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
+              <caret line="52" column="33" selection-start-line="52" selection-start-column="33" selection-end-line="52" selection-end-column="33" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -70,8 +70,8 @@
       <file leaf-file-name="hero.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hero.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.42036125">
-              <caret line="132" column="75" selection-start-line="132" selection-start-column="75" selection-end-line="132" selection-end-column="75" />
+            <state vertical-scroll-proportion="0.5632184">
+              <caret line="208" column="67" selection-start-line="208" selection-start-column="67" selection-end-line="208" selection-end-column="67" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -132,8 +132,8 @@
         <option value="$PROJECT_DIR$/mygame.py" />
         <option value="$PROJECT_DIR$/start_state.py" />
         <option value="$PROJECT_DIR$/background.py" />
-        <option value="$PROJECT_DIR$/main_state.py" />
         <option value="$PROJECT_DIR$/map.py" />
+        <option value="$PROJECT_DIR$/main_state.py" />
         <option value="$PROJECT_DIR$/hero.py" />
       </list>
     </option>
@@ -417,7 +417,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="776" extended-state="6" />
+    <frame x="-8" y="-8" width="1296" height="776" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14765625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -897,14 +897,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/My_pico2d.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="245" column="46" selection-start-line="245" selection-start-column="46" selection-end-line="245" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/map.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -915,10 +907,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/My_pico2d.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="245" column="46" selection-start-line="245" selection-start-column="46" selection-end-line="245" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main_state.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="20" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
+          <caret line="52" column="33" selection-start-line="52" selection-start-column="33" selection-end-line="52" selection-end-column="33" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
@@ -927,8 +927,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hero.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42036125">
-          <caret line="132" column="75" selection-start-line="132" selection-start-column="75" selection-end-line="132" selection-end-column="75" />
+        <state vertical-scroll-proportion="0.5632184">
+          <caret line="208" column="67" selection-start-line="208" selection-start-column="67" selection-end-line="208" selection-end-column="67" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>

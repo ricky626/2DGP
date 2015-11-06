@@ -34,7 +34,7 @@ def update():
     background.update()
     hero.update()
     map.update()
-    delay(0.015)
+    delay(0.014)
     pass
 
 def draw():
@@ -60,7 +60,6 @@ def main():
         handle_events()
         update()
         draw()
-        delay(0.05)
     exit()
 
 if __name__ == '__main__':
