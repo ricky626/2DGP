@@ -9,6 +9,7 @@ map                         = None
 class Map:
     hero                    = None
 
+
     def __init__(self):
         self.m_nStage       = 1
         self.object         = [[0 for row in range(0, 16)] for col in range(0, 12)]

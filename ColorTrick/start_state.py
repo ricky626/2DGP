@@ -31,7 +31,7 @@ def update():
             frames = (frames + 1) % 2
             Timer = SDL_GetTicks()
     background.update()
-    delay(0.015)
+    #delay(0.015)
 
 def draw():
     global image

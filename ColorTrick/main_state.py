@@ -34,7 +34,7 @@ def update():
     background.update()
     hero.update()
     map.update()
-    delay(0.014)
+    #delay(0.014)
     pass
 
 def draw():

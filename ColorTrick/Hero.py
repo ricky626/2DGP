@@ -165,7 +165,6 @@ class Hero:
                 self.m_nDropSpeed = 10
                 self.m_MoveState = 0
                 self.m_JTime = -1
-               # self.m_CharState = 4
 
 
 
