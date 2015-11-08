@@ -27,6 +27,8 @@ class Hero:
         self.m_nSwitchNo = 0
         self.m_nDropSpeed = 10
         self.m_JTime = -1
+        self.tmpX = 0
+        self.tmpY = 0
 
         self.leftbutton = False
         self.rightbutton = False
@@ -47,35 +49,37 @@ class Hero:
     def CrashDetection(self, x, y):
         XTile = int(x / 64) #X 타일의 번호
         YTile = int(y / 64) #Y 타일의 번호
-        tmpX = 0
-        tmpY = 0
         tmpMX = 40
         for i in range(0, 12):
             for j in range(0, 16):
-                if(self.map.object[i][j] == 0): continue
-                if(self.map.object[i][j] in [1, 2, 3, 4, 5, 6]):
+                if(self.map.object[i][j] == 0):
+                    continue
+                if(self.map.object[i][j] in [1, 2, 3, 4, 5, 6]): #블록이면
                     if(self.map.objectX[i][j]/64 == XTile and self.map.objectY[i][j]/64 == YTile): return 1
 
-                #elif(self.map.object[i][j] == (14, 15, 16, 17, 18)): #스위치이면 #꺼진거만 함
-                #    if(self.map.objectX[i][j] == XTile and self.map.objectY[i][j] == YTile):
-                #        tmpX = self.map.objectX[i][j]
-                #        tmpY = self.map.objectY[i][j]
+                if(self.map.object[i][j] in [14]): #스위치이면
+                    if(self.map.objectX[i][j]/64 == XTile and self.map.objectY[i][j]/64 == YTile):
+                        self.tmpX = self.map.objectX[i][j]
+                        self.tmpY = self.map.objectY[i][j] #대입이안돼
 
-                    #if(m_Object[i][5] == 1)#켜진 스위치이면
-                        #tmpMX = 42
+                        #if(self.map.object[i][j] in [19, 20, 21, 22, 23]):#켜진 스위치이면
+                            #tmpMX = 42
 
-                    if(tmpX + 20 <= x and tmpX + 40 >= x and (tmpY + 80 > y and tmpY + tmpMX < y - 2)):
-                        return 1
+                    if(self.tmpX + 20 <= x and self.tmpX + 40 >= x and (self.tmpY + 80 > y and self.tmpY + tmpMX < y - 2)):
+                        return 1;
+        print(int(x), int(y))
+        print(self.tmpX, self.tmpY)
         #print(int(XTile), int(YTile))
+
         #print(self.map.objectX[11][0]/64, self.map.objectY[11][0]/64)
         return 0
 
     def GetCharCrash(self, x, y, w):
-        if (w == 0):
+        if (w == 0): #점프
             if (self.CrashDetection(x + 2, y) != 0): return 1
             elif (self.CrashDetection(x + 18, y) != 0): 	return 1
-        elif (w == 1):
-            if (self.CrashDetection(x + 2, y) == 1): return 1
+        elif (w == 1): #이동
+            if (self.CrashDetection(x + 2, y) != 0): return 1
             elif(self.CrashDetection(x + 18, y) != 0): return 1
             elif (self.CrashDetection(x + 2, y + 48) != 0): return 1
             elif (self.CrashDetection(x + 18, y + 48) != 0): return 1
@@ -148,7 +152,6 @@ class Hero:
                 self.m_JTime = 0
                 self.m_nDropSpeed = 10
                 self.m_MoveState = 2
-                print("#########")
 
         elif(self.m_JTime == 0):
             #self.m_JTime = -1
@@ -168,8 +171,8 @@ class Hero:
 
 
 
-        print(self.m_JTime)
-        print(self.m_Movestate)
+        #print(self.m_JTime)
+        #print(self.m_Movestate)
         pass
 
     def draw(self):
