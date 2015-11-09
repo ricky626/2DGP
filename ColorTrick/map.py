@@ -7,7 +7,7 @@ name                        = "Map"
 map                         = None
 
 class Map:
-    hero                    = None
+    flag                    = None
 
 
     def __init__(self):
@@ -19,7 +19,7 @@ class Map:
 
         self.LoadMap(self.m_nStage)
 
-        if(Map.hero == None):
+        if(self.flag == None):
             #self.hero       = load_image("res/hero/right_stand.png")
             self.flag       = load_image("res/hero/flag1.png")
             self.black      = load_image("res/block/black.png")
@@ -58,11 +58,6 @@ class Map:
                         #self.objectY[i][j] += 10
                         self.HeroX = self.objectX[i][j]
                         self.HeroY = self.objectY[i][j]
-
-
-                    # if(self.object[i][j] in range(14, 19)):
-                    #     self.objectX[i][j] += 12
-                    #     self.objectY[i][j] += 28
         pass
 
     def LoadMap(self, m_nStage):
@@ -75,9 +70,6 @@ class Map:
         pass
 
     def update(self):
-        if(SDL_GetTicks() - self.dotTime > 200):
-            self.dot_frames = (self.dot_frames + 1) % 2
-            self.dotTime = SDL_GetTicks()
         pass
 
     def draw(self):
@@ -103,6 +95,12 @@ class Map:
                 if(self.object[i][j] == 16): self.green_off.draw(self.objectX[i][j]+ 12, self.objectY[i][j]+ 28)
                 if(self.object[i][j] == 17): self.blue_off.draw(self.objectX[i][j]+ 12, self.objectY[i][j]+ 28)
                 if(self.object[i][j] == 18): self.purple_off.draw(self.objectX[i][j]+ 12, self.objectY[i][j]+ 28)
+
+                if(self.object[i][j] == 19): self.red_on.draw(self.objectX[i][j] + 12, self.objectY[i][j] + 28)
+                if(self.object[i][j] == 20): self.yellow_on.draw(self.objectX[i][j]+ 12, self.objectY[i][j]+ 28)
+                if(self.object[i][j] == 21): self.green_on.draw(self.objectX[i][j]+ 12, self.objectY[i][j]+ 28)
+                if(self.object[i][j] == 22): self.blue_on.draw(self.objectX[i][j]+ 12, self.objectY[i][j]+ 28)
+                if(self.object[i][j] == 23): self.purple_on.draw(self.objectX[i][j]+ 12, self.objectY[i][j]+ 28)
 
 
         pass
