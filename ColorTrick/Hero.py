@@ -109,14 +109,19 @@ class Hero:
         return 0
 
     def SetSwitch(self, color):
-         for i in range(0, 12):
-             for j in range(0, 16):
+        for i in range(0, 12):
+            for j in range(0, 16):
                 if(self.map.object[i][j] == color + 13):
                     self.map.object[i][j] = color + 18
-                    print("on")
+
                 elif(self.map.object[i][j] == color + 18):
                     self.map.object[i][j] = color + 13
-                    print("off")
+
+                if(self.map.object[i][j] == color):
+                    self.map.object[i][j] = self.map.object[i][j] + 8
+
+                elif(self.map.object[i][j] == color + 8):
+                    self.map.object[i][j] = color
 
     def GetCharCrash(self, x, y, w):
         if (w == 0): #점프
@@ -130,7 +135,6 @@ class Hero:
         return 0
 
     def update(self):
-
         if(SDL_GetTicks() - self.map.dotTime > 200):
             self.map.dot_frames = (self.map.dot_frames + 1) % 2
             self.map.dotTime = SDL_GetTicks()
@@ -179,7 +183,7 @@ class Hero:
                 if(self.m_CharState != 5 and self.m_CharState != 6):
                     if(self.m_MoveState == 0):
                         if(self.m_JTime <= 0):
-                            self.m_JTime = 25
+                            self.m_JTime = 23
                             self.m_Movestate = 1
 
                         if(self.m_CharState == 1 or self.m_CharState == 3):
