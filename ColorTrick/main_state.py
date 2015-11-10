@@ -40,9 +40,9 @@ def update():
 def draw():
     clear_canvas()
     background.draw()
-
-    hero.draw()
     #map.draw()
+    hero.draw()
+
     update_canvas()
 
 def handle_events():

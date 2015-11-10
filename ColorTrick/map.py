@@ -7,8 +7,7 @@ name                        = "Map"
 map                         = None
 
 class Map:
-    flag                    = None
-
+    flag = None
 
     def __init__(self):
         self.m_nStage       = 1
@@ -16,6 +15,7 @@ class Map:
         self.dot_frames     = 0
         self.name           = "res/Stage/Stage-.txt"
         self.dotTime        = SDL_GetTicks()
+
 
         self.LoadMap(self.m_nStage)
 
@@ -70,6 +70,9 @@ class Map:
         pass
 
     def update(self):
+        if(SDL_GetTicks() - self.dotTime > 200):
+            self.dot_frames = (self.dot_frames + 1) % 2
+            self.dotTime = SDL_GetTicks()
         pass
 
     def draw(self):

@@ -33,7 +33,7 @@ class Hero:
         self.rightbutton = False
         self.jumpbutton = False
 
-
+        self.holdState = False
 
         if(Hero.left_stand == None):
             self.left_run           = load_image("res/hero/left_run.png")
@@ -44,6 +44,7 @@ class Hero:
 
             self.left_jump          = load_image("res/hero/left_jump.png")
             self.right_jump         = load_image("res/hero/right_jump.png")
+            self.hold = load_image("res/menu/hold.png")
         pass
 
     def CrashDetection(self, x, y):
@@ -102,6 +103,12 @@ class Hero:
                         elif(self.map.object[i][j] in [19, 20, 21, 22, 23]):
                             self.m_nSwitchNo = self.map.object[i][j] - 18
 
+                        if(self.map.object[i][j] == self.m_nSwitchNo + 13):
+                            self.map.object[i][j] = self.m_nSwitchNo + 18
+
+                        elif(self.map.object[i][j] == self.m_nSwitchNo + 18):
+                            self.map.object[i][j] = self.m_nSwitchNo + 13
+
                         return 1
 
         self.m_nSwitchNo = -1
@@ -111,12 +118,7 @@ class Hero:
     def SetSwitch(self, color):
         for i in range(0, 12):
             for j in range(0, 16):
-                if(self.map.object[i][j] == color + 13):
-                    self.map.object[i][j] = color + 18
-
-                elif(self.map.object[i][j] == color + 18):
-                    self.map.object[i][j] = color + 13
-
+                #block change
                 if(self.map.object[i][j] == color):
                     self.map.object[i][j] = self.map.object[i][j] + 8
 
@@ -135,6 +137,8 @@ class Hero:
         return 0
 
     def update(self):
+        if(self.holdState):
+            return
         if(SDL_GetTicks() - self.map.dotTime > 200):
             self.map.dot_frames = (self.map.dot_frames + 1) % 2
             self.map.dotTime = SDL_GetTicks()
@@ -245,6 +249,9 @@ class Hero:
             self.left_jump.clip_draw(self.jump_frames * 29, 0, 29, 61, self.HeroX, self.HeroY)
         elif(self.m_CharState == 6):
             self.right_jump.clip_draw(self.jump_frames * 29, 0, 29, 61, self.HeroX, self.HeroY)
+
+        if(self.holdState):
+            self.hold.draw(0, 0)
         pass
 
 
@@ -262,6 +269,11 @@ class Hero:
             if event.key == SDLK_SPACE:# and (self.m_CharState != 5 or self.m_CharState != 6):# and (self.m_CharState != 5 or self.m_CharState != 6):
                 self.jumpbutton = True
 
+            if event.key == SDLK_ESCAPE:
+                if(self.holdState == False):
+                    self.holdState = True
+                else:
+                    self.holdState = False
                 pass
 
         elif(event.type == SDL_KEYUP):
