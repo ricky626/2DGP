@@ -13,15 +13,17 @@ class Map:
         self.m_nStage       = 1
         self.object         = [[0 for row in range(0, 16)] for col in range(0, 12)]
         self.dot_frames     = 0
+        self.flag_frames    = 0
         self.name           = "res/Stage/Stage-.txt"
         self.dotTime        = SDL_GetTicks()
+        self.flagTime       = SDL_GetTicks()
 
 
         self.LoadMap(self.m_nStage)
 
         if(self.flag == None):
             #self.hero       = load_image("res/hero/right_stand.png")
-            self.flag       = load_image("res/hero/flag1.png")
+            self.flag       = load_image("res/hero/flag.png")
             self.black      = load_image("res/block/black.png")
             self.red        = load_image("res/block/red.png")
             self.yellow     = load_image("res/block/yellow.png")
@@ -70,9 +72,6 @@ class Map:
         pass
 
     def update(self):
-        if(SDL_GetTicks() - self.dotTime > 200):
-            self.dot_frames = (self.dot_frames + 1) % 2
-            self.dotTime = SDL_GetTicks()
         pass
 
     def draw(self):
@@ -86,7 +85,7 @@ class Map:
                 elif(self.object[i][j] == 5): self.purple.draw(self.objectX[i][j], self.objectY[i][j])
                 elif(self.object[i][j] == 6): self.black.draw(self.objectX[i][j], self.objectY[i][j])
                 #if(self.object[i][j] == 7): self.hero.draw(self.HeroX, self.HeroY)
-                elif(self.object[i][j] == 8): self.flag.draw(self.objectX[i][j], self.objectY[i][j])
+                elif(self.object[i][j] == 8): self.flag.clip_draw(self.flag_frames * 64, 0, 64, 64, self.objectX[i][j], self.objectY[i][j])
                 elif(self.object[i][j] == 9): self.dot_red.clip_draw(self.dot_frames * 64, 0, 64, 64, self.objectX[i][j], self.objectY[i][j])
                 elif(self.object[i][j] == 10):self.dot_yellow.clip_draw(self.dot_frames * 64, 0, 64, 64, self.objectX[i][j], self.objectY[i][j])
                 elif(self.object[i][j] == 11):self.dot_green.clip_draw(self.dot_frames * 64, 0, 64, 64, self.objectX[i][j], self.objectY[i][j])

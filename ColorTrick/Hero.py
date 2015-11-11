@@ -142,6 +142,9 @@ class Hero:
         if(SDL_GetTicks() - self.map.dotTime > 200):
             self.map.dot_frames = (self.map.dot_frames + 1) % 2
             self.map.dotTime = SDL_GetTicks()
+        if(SDL_GetTicks() - self.map.flagTime > 150):
+            self.map.flag_frames = (self.map.flag_frames + 1) % 3
+            self.map.flagTime = SDL_GetTicks()
 
         if(self.leftbutton == True):
             if(self.m_Movestate == 0):
