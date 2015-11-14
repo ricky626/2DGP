@@ -17,49 +17,49 @@ class Map:
         self.name           = "res/Stage/Stage-.txt"
         self.dotTime        = SDL_GetTicks()
         self.flagTime       = SDL_GetTicks()
+        self.objectX    = [[0 for row in range(0, 16)] for col in range(0, 12)]
+        self.objectY    = [[0 for row in range(0, 16)] for col in range(0, 12)]
 
-
-        self.LoadMap(self.m_nStage)
-
-        if(self.flag == None):
+        if(Map.flag == None):
             #self.hero       = load_image("res/hero/right_stand.png")
-            self.flag       = load_image("res/hero/flag.png")
-            self.black      = load_image("res/block/black.png")
-            self.red        = load_image("res/block/red.png")
-            self.yellow     = load_image("res/block/yellow.png")
-            self.green      = load_image("res/block/green.png")
-            self.blue       = load_image("res/block/blue.png")
-            self.purple     = load_image("res/block/purple.png")
-            self.dot_red    = load_image("res/block/dot_red.png")
-            self.dot_yellow = load_image("res/block/dot_yellow.png")
-            self.dot_green  = load_image("res/block/dot_green.png")
-            self.dot_blue   = load_image("res/block/dot_blue.png")
-            self.dot_purple = load_image("res/block/dot_purple.png")
+            Map.flag       = load_image("res/hero/flag.png")
+            Map.black      = load_image("res/block/black.png")
+            Map.red        = load_image("res/block/red.png")
+            Map.yellow     = load_image("res/block/yellow.png")
+            Map.green      = load_image("res/block/green.png")
+            Map.blue       = load_image("res/block/blue.png")
+            Map.purple     = load_image("res/block/purple.png")
+            Map.dot_red    = load_image("res/block/dot_red.png")
+            Map.dot_yellow = load_image("res/block/dot_yellow.png")
+            Map.dot_green  = load_image("res/block/dot_green.png")
+            Map.dot_blue   = load_image("res/block/dot_blue.png")
+            Map.dot_purple = load_image("res/block/dot_purple.png")
 
-            self.red_on     = load_image("res/switch/red_on.png")
-            self.red_off    = load_image("res/switch/red_off.png")
-            self.yellow_on  = load_image("res/switch/yellow_on.png")
-            self.yellow_off = load_image("res/switch/yellow_off.png")
-            self.green_on   = load_image("res/switch/green_on.png")
-            self.green_off  = load_image("res/switch/green_off.png")
-            self.blue_on    = load_image("res/switch/blue_on.png")
-            self.blue_off   = load_image("res/switch/blue_off.png")
-            self.purple_on  = load_image("res/switch/purple_on.png")
-            self.purple_off = load_image("res/switch/purple_off.png")
+            Map.red_on     = load_image("res/switch/red_on.png")
+            Map.red_off    = load_image("res/switch/red_off.png")
+            Map.yellow_on  = load_image("res/switch/yellow_on.png")
+            Map.yellow_off = load_image("res/switch/yellow_off.png")
+            Map.green_on   = load_image("res/switch/green_on.png")
+            Map.green_off  = load_image("res/switch/green_off.png")
+            Map.blue_on    = load_image("res/switch/blue_on.png")
+            Map.blue_off   = load_image("res/switch/blue_off.png")
+            Map.purple_on  = load_image("res/switch/purple_on.png")
+            Map.purple_off = load_image("res/switch/purple_off.png")
+        self.LoadMap(self.m_nStage)
+        self.Init()
+        pass
 
-            self.objectX    = [[0 for row in range(0, 16)] for col in range(0, 12)]
-            self.objectY    = [[0 for row in range(0, 16)] for col in range(0, 12)]
+    def Init(self):
+        for i in range(0, 12):
+            for j in range(0, 16):
+                self.objectX[i][j] = j * 64
+                self.objectY[i][j] = i * 64
 
-            for i in range(0, 12):
-                for j in range(0, 16):
-                    self.objectX[i][j] = j * 64
-                    self.objectY[i][j] = i * 64
-
-                    if(self.object[i][j] == 7):
-                        self.objectX[i][j] += 7
-                        #self.objectY[i][j] += 10
-                        self.HeroX = self.objectX[i][j]
-                        self.HeroY = self.objectY[i][j]
+                if(self.object[i][j] == 7):
+                    self.objectX[i][j] += 7
+                    #self.objectY[i][j] += 10
+                    self.HeroX = self.objectX[i][j]
+                    self.HeroY = self.objectY[i][j]
         pass
 
     def LoadMap(self, m_nStage):
@@ -71,10 +71,10 @@ class Map:
         f.close()
         pass
 
-    def update(self, frame_time):
+    def update(self):
         pass
 
-    def draw(self, frame_time):
+    def draw(self):
         for i in range(0, 12):
             for j in range(0, 16):
 

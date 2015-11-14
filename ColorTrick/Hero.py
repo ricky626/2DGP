@@ -9,10 +9,8 @@ name = "Hero"
 class Hero:
     left_stand = None
 
-
     def __init__(self):
         self.map = Map()
-
         self.HeroX = self.map.HeroX
         self.HeroY = self.map.HeroY
         self.run_frames = 0
@@ -36,15 +34,15 @@ class Hero:
         self.holdState = False
 
         if(Hero.left_stand == None):
-            self.left_run           = load_image("res/hero/left_run.png")
-            self.right_run          = load_image("res/hero/right_run.png")
+            Hero.left_run           = load_image("res/hero/left_run.png")
+            Hero.right_run          = load_image("res/hero/right_run.png")
 
-            self.left_stand         = load_image("res/hero/left_stand.png")
-            self.right_stand        = load_image("res/hero/right_stand.png")
+            Hero.left_stand         = load_image("res/hero/left_stand.png")
+            Hero.right_stand        = load_image("res/hero/right_stand.png")
 
-            self.left_jump          = load_image("res/hero/left_jump.png")
-            self.right_jump         = load_image("res/hero/right_jump.png")
-            self.hold = load_image("res/menu/hold.png")
+            Hero.left_jump          = load_image("res/hero/left_jump.png")
+            Hero.right_jump         = load_image("res/hero/right_jump.png")
+            Hero.hold = load_image("res/menu/hold.png")
         pass
 
     def CrashDetection(self, x, y):
@@ -136,9 +134,10 @@ class Hero:
             elif (self.CrashDetection(x + 18, y + 48) != 0): return 1
         return 0
 
-    def update(self, frame_time):
+    def update(self):
         if(self.holdState):
             return
+
         if(SDL_GetTicks() - self.map.dotTime > 200):
             self.map.dot_frames = (self.map.dot_frames + 1) % 2
             self.map.dotTime = SDL_GetTicks()
@@ -236,9 +235,9 @@ class Hero:
 
             pass
 
-    def draw(self, frame_time):
+    def draw(self):
 
-        self.map.draw(frame_time)
+        self.map.draw()
 
         if(self.m_CharState == 1):
             self.left_run.clip_draw(self.run_frames * 25, 0, 25, 50, self.HeroX, self.HeroY)
@@ -259,7 +258,7 @@ class Hero:
 
 
 
-    def handle_events(self,event, frame_time):
+    def handle_events(self,event):
         if event.type == SDL_KEYDOWN:
             if event.key == SDLK_LEFT:
                 self.leftbutton = True
@@ -278,6 +277,18 @@ class Hero:
                 else:
                     self.holdState = False
                 pass
+            if event.key == SDLK_r:
+                self.map.LoadMap(self.map.m_nStage)
+                self.map.Init()
+                self.HeroX = self.map.HeroX
+                self.HeroY = self.map.HeroY
+                self.m_Movestate = 0
+                self.m_CharState = 4
+
+
+
+
+
 
         elif(event.type == SDL_KEYUP):
             if(event.key == SDLK_LEFT) and self.leftbutton == True:
