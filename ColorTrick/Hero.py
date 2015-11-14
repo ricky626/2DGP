@@ -136,7 +136,7 @@ class Hero:
             elif (self.CrashDetection(x + 18, y + 48) != 0): return 1
         return 0
 
-    def update(self):
+    def update(self, frame_time):
         if(self.holdState):
             return
         if(SDL_GetTicks() - self.map.dotTime > 200):
@@ -236,9 +236,9 @@ class Hero:
 
             pass
 
-    def draw(self):
+    def draw(self, frame_time):
 
-        self.map.draw()
+        self.map.draw(frame_time)
 
         if(self.m_CharState == 1):
             self.left_run.clip_draw(self.run_frames * 25, 0, 25, 50, self.HeroX, self.HeroY)
@@ -259,7 +259,7 @@ class Hero:
 
 
 
-    def handle_events(self,event):
+    def handle_events(self,event, frame_time):
         if event.type == SDL_KEYDOWN:
             if event.key == SDLK_LEFT:
                 self.leftbutton = True

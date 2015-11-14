@@ -30,38 +30,26 @@ def exit():
     del(hero)
     pass
 
-def update():
-    background.update()
-    hero.update()
-    map.update()
+def update(frame_time):
+    background.update(frame_time)
+    hero.update(frame_time)
+    map.update(frame_time)
     #delay(0.014)
     pass
 
-def draw():
+def draw(frame_time):
     clear_canvas()
-    background.draw()
+    background.draw(frame_time)
     #map.draw()
-    hero.draw()
+    hero.draw(frame_time)
 
     update_canvas()
 
-def handle_events():
+def handle_events(frame_time):
     events = get_events()
 
     for event in events:
         if event.type == SDL_QUIT:
             game_framework.quit()
-        hero.handle_events(event)
+        hero.handle_events(event, frame_time)
 
-
-
-def main():
-    enter()
-    while (1):
-        handle_events()
-        update()
-        draw()
-    exit()
-
-if __name__ == '__main__':
-    main()

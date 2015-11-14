@@ -71,10 +71,10 @@ class Map:
         f.close()
         pass
 
-    def update(self):
+    def update(self, frame_time):
         pass
 
-    def draw(self):
+    def draw(self, frame_time):
         for i in range(0, 12):
             for j in range(0, 16):
 
