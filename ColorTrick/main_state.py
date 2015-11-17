@@ -16,10 +16,10 @@ map         = None
 
 def enter():
     global background, map, hero
-
     background          = Background()
     map                 = Map()
     hero                = Hero()
+
     pass
 
 def exit():
@@ -31,15 +31,18 @@ def exit():
     pass
 
 def update():
-    #background.update()
-    hero.update()
+    global background, map, hero
+    background.update()
     map.update()
+    hero.update()
     #delay(0.014)
     pass
 
 def draw():
+    global background, map, hero
+
     clear_canvas()
-    #background.draw()
+    background.draw()
     #map.draw()
     hero.draw()
 

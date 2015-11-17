@@ -11,15 +11,18 @@ class Hero:
 
     def __init__(self):
         self.map = Map()
+
         self.HeroX = self.map.HeroX
         self.HeroY = self.map.HeroY
         self.EndX = self.map.EndX
         self.EndY = self.map.EndY
         self.run_frames = 0
         self.jump_frames = 0
+        self.laser_frames = 0
 
         self.moveTime = SDL_GetTicks()
         self.jumpAnimationTime = SDL_GetTicks()
+        self.laserTime = 0
 
         LEFT_RUN, RIGHT_RUN, LEFT_STAND, self.RIGHT_STAND, LEFT_JUMP, RIGHT_JUMP = range(1, 7)
         self.m_CharState = self.RIGHT_STAND              # 1 : Left Run # 2 : Right Run # 3: Left Stand # 4 : Right Stand # 5 : Left Jump # 6 : Right Jump
@@ -32,6 +35,7 @@ class Hero:
         self.leftbutton = False
         self.rightbutton = False
         self.jumpbutton = False
+        self.charview = False
 
         self.holdState = False
 
@@ -44,7 +48,8 @@ class Hero:
 
             Hero.left_jump          = load_image("res/hero/left_jump.png")
             Hero.right_jump         = load_image("res/hero/right_jump.png")
-            Hero.hold = load_image("res/menu/hold.png")
+            Hero.hold               = load_image("res/menu/hold.png")
+            Hero.laser              = load_image("res/hero/laser.png")
         pass
 
     def CrashDetection(self, x, y):
@@ -57,6 +62,7 @@ class Hero:
             for j in range(0, 16):
                 if(self.map.object[i][j] == 0):
                     continue
+
                 if(self.map.object[i][j] in [1, 2, 3, 4, 5, 6] and self.map.objectX[i][j]/64 == XTile and self.map.objectY[i][j]/64 == YTile): #블록이면
                     return 1
 
@@ -139,11 +145,7 @@ class Hero:
 
 
     def collide(self, aX, aY, bX, bY):
-        #if(self.m_CharState != 5 and self.m_CharState != 6):
         left_a, bottom_a, right_a, top_a = aX, aY, aX + 25, aY + 50
-        #elif(self.m_CharState == 5 or self.m_CharState == 6):
-        #    left_a, bottom_a, right_a, top_a = self.HeroX, self.HeroY, self.HeroX + 29, self.HeroY + 61
-
         left_b, bottom_b, right_b, top_b = bX, bY, bX + 64, bY + 64
         if left_a > right_b: return False
         if right_a < left_b: return False
@@ -155,6 +157,15 @@ class Hero:
     def update(self):
         if(self.holdState):
             return
+        if(self.charview == False):
+            if(self.laserTime == 0):
+                self.laserTime = SDL_GetTicks()
+
+            if(SDL_GetTicks() - self.laserTime > 55):
+                self.laser_frames = (self.laser_frames + 1) % 19
+                self.laserTime = SDL_GetTicks()
+            if(self.laser_frames == 18):
+                self.charview = True
 
         if(SDL_GetTicks() - self.map.dotTime > 200):
             self.map.dot_frames = (self.map.dot_frames + 1) % 2
@@ -258,25 +269,26 @@ class Hero:
         if(self.collide(self.HeroX, self.HeroY, self.EndX, self.EndY)):
             self.LoadStage(self.map.m_nStage + 1)
 
-        print(self.m_nDropSpeed)
         pass
 
     def draw(self):
 
         self.map.draw()
-
-        if(self.m_CharState == 1):
-            self.left_run.clip_draw(self.run_frames * 25, 0, 25, 50, self.HeroX, self.HeroY)
-        elif(self.m_CharState == 2):
-            self.right_run.clip_draw(self.run_frames * 25, 0, 25, 50, self.HeroX, self.HeroY)
-        elif(self.m_CharState == 3):
-            self.left_stand.draw(self.HeroX, self.HeroY)
-        elif(self.m_CharState == 4):
-            self.right_stand.draw(self.HeroX, self.HeroY)
-        elif(self.m_CharState == 5):
-            self.left_jump.clip_draw(self.jump_frames * 29, 0, 29, 61, self.HeroX, self.HeroY)
-        elif(self.m_CharState == 6):
-            self.right_jump.clip_draw(self.jump_frames * 29, 0, 29, 61, self.HeroX, self.HeroY)
+        if(self.charview == False):
+            self.laser.clip_draw(self.laser_frames * 64, 0, 64, 768, self.HeroX - 17, self.HeroY - 720)
+        else:
+            if(self.m_CharState == 1):
+                self.left_run.clip_draw(self.run_frames * 25, 0, 25, 50, self.HeroX, self.HeroY)
+            elif(self.m_CharState == 2):
+                self.right_run.clip_draw(self.run_frames * 25, 0, 25, 50, self.HeroX, self.HeroY)
+            elif(self.m_CharState == 3):
+                self.left_stand.draw(self.HeroX, self.HeroY)
+            elif(self.m_CharState == 4):
+                self.right_stand.draw(self.HeroX, self.HeroY)
+            elif(self.m_CharState == 5):
+                self.left_jump.clip_draw(self.jump_frames * 29, 0, 29, 61, self.HeroX, self.HeroY)
+            elif(self.m_CharState == 6):
+                self.right_jump.clip_draw(self.jump_frames * 29, 0, 29, 61, self.HeroX, self.HeroY)
 
         if(self.holdState):
             self.hold.draw(0, 0)
@@ -294,10 +306,16 @@ class Hero:
         self.m_CharState = 4
         self.m_nDropSpeed = 10
         self.m_JTime = -1
+        self.charview = False
+        self.leftbutton = False
+        self.rightbutton = False
+        self.upbutton = False
+        self.downbutton = False
+        self.jumpbutton = False
         pass
 
     def handle_events(self,event):
-        if event.type == SDL_KEYDOWN:
+        if event.type == SDL_KEYDOWN and self.charview:
             if event.key == SDLK_LEFT:
                 self.leftbutton = True
                 pass
@@ -308,6 +326,7 @@ class Hero:
 
             if event.key == SDLK_SPACE:# and (self.m_CharState != 5 or self.m_CharState != 6):# and (self.m_CharState != 5 or self.m_CharState != 6):
                 self.jumpbutton = True
+                pass
 
             if event.key == SDLK_ESCAPE:
                 if(self.holdState == False):
@@ -327,7 +346,6 @@ class Hero:
             if event.key == SDLK_r:
                 self.LoadStage(self.map.m_nStage)
                 pass
-
 
 
 

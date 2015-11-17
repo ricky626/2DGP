@@ -38,11 +38,12 @@ class Background:
             Background.background = load_image("res/background.png")
 
             for i in range(0, 5):
-               self.Polygon[0][i] = load_image(self.rect.replace('-', str(i+1)))
-               self.Polygon[1][i] = load_image(self.tr.replace('-', str(i+1)))
-               self.Polygon[2][i] = load_image(self.cir.replace('-', str(i+1)))
-               self.Polygon[3][i] = load_image(self.fa.replace('-', str(i+1)))
-               self.Polygon[4][i] = load_image(self.yut.replace('-', str(i+1)))
+                self.Polygon[0][i] = load_image(self.rect.replace('-', str(i+1)))
+                self.Polygon[1][i] = load_image(self.tr.replace('-', str(i+1)))
+                self.Polygon[2][i] = load_image(self.cir.replace('-', str(i+1)))
+                self.Polygon[3][i] = load_image(self.fa.replace('-', str(i+1)))
+                self.Polygon[4][i] = load_image(self.yut.replace('-', str(i+1)))
+
 
         pass
 
@@ -59,12 +60,12 @@ class Background:
 
             self.PolygonDegree += 0.02
 
-
     def draw(self):
         self.background.draw(0, 0)
 
         for i in range(0, 5):
-            for j in range(0, 5):
-                self.Polygon[i][j].rotate_draw(self.PolygonDegree, self.PolygonX[i][j], self.PolygonY[i][j])
-                pass
+             for j in range(0, 5):
+                 self.Polygon[i][j].rotate_draw(self.PolygonDegree, self.PolygonX[i][j], self.PolygonY[i][j])
+                 #self.Polygon[i][j].draw(self.PolygonX[i][j], self.PolygonY[i][j])
+                 pass
         pass
