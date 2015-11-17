@@ -13,6 +13,8 @@ class Hero:
         self.map = Map()
         self.HeroX = self.map.HeroX
         self.HeroY = self.map.HeroY
+        self.EndX = self.map.EndX
+        self.EndY = self.map.EndY
         self.run_frames = 0
         self.jump_frames = 0
 
@@ -123,6 +125,7 @@ class Hero:
                 elif(self.map.object[i][j] == color + 8):
                     self.map.object[i][j] = color
 
+
     def GetCharCrash(self, x, y, w):
         if (w == 0): #점프
             if (self.CrashDetection(x + 2, y) != 0): return 1
@@ -134,6 +137,21 @@ class Hero:
             elif (self.CrashDetection(x + 18, y + 48) != 0): return 1
         return 0
 
+
+    def collide(self, aX, aY, bX, bY):
+        #if(self.m_CharState != 5 and self.m_CharState != 6):
+        left_a, bottom_a, right_a, top_a = aX, aY, aX + 25, aY + 50
+        #elif(self.m_CharState == 5 or self.m_CharState == 6):
+        #    left_a, bottom_a, right_a, top_a = self.HeroX, self.HeroY, self.HeroX + 29, self.HeroY + 61
+
+        left_b, bottom_b, right_b, top_b = bX, bY, bX + 64, bY + 64
+        if left_a > right_b: return False
+        if right_a < left_b: return False
+        if top_a < bottom_b: return False
+        if bottom_a > top_b: return False
+        return True
+
+
     def update(self):
         if(self.holdState):
             return
@@ -141,6 +159,7 @@ class Hero:
         if(SDL_GetTicks() - self.map.dotTime > 200):
             self.map.dot_frames = (self.map.dot_frames + 1) % 2
             self.map.dotTime = SDL_GetTicks()
+
         if(SDL_GetTicks() - self.map.flagTime > 150):
             self.map.flag_frames = (self.map.flag_frames + 1) % 3
             self.map.flagTime = SDL_GetTicks()
@@ -233,7 +252,14 @@ class Hero:
         if(self.SwitchDetection(self.HeroX, self.HeroY + 48) == 1):
             self.SetSwitch(self.m_nSwitchNo)
 
-            pass
+        if(self.HeroY > 768):
+            self.LoadStage(self.map.m_nStage)
+
+        if(self.collide(self.HeroX, self.HeroY, self.EndX, self.EndY)):
+            self.LoadStage(self.map.m_nStage + 1)
+
+        print(self.m_nDropSpeed)
+        pass
 
     def draw(self):
 
@@ -256,7 +282,19 @@ class Hero:
             self.hold.draw(0, 0)
         pass
 
-
+    def LoadStage(self, count):
+        self.map.m_nStage = count
+        self.map.LoadMap(self.map.m_nStage)
+        self.map.Init()
+        self.HeroX = self.map.HeroX
+        self.HeroY = self.map.HeroY
+        self.EndX = self.map.EndX
+        self.EndY = self.map.EndY
+        self.m_Movestate = 0
+        self.m_CharState = 4
+        self.m_nDropSpeed = 10
+        self.m_JTime = -1
+        pass
 
     def handle_events(self,event):
         if event.type == SDL_KEYDOWN:
@@ -277,15 +315,18 @@ class Hero:
                 else:
                     self.holdState = False
                 pass
+
+            if event.key == SDLK_1:
+                if(self.map.m_nStage > 1):
+                    self.LoadStage(self.map.m_nStage - 1)
+                pass
+            elif event.key == SDLK_2:
+                self.LoadStage(self.map.m_nStage + 1)
+                pass
+
             if event.key == SDLK_r:
-                self.map.LoadMap(self.map.m_nStage)
-                self.map.Init()
-                self.HeroX = self.map.HeroX
-                self.HeroY = self.map.HeroY
-                self.m_Movestate = 0
-                self.m_CharState = 4
-
-
+                self.LoadStage(self.map.m_nStage)
+                pass
 
 
 

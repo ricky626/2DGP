@@ -20,7 +20,6 @@ class Background:
         self.fa                     = "res/fa/fa-.png"
         self.yut                    = "res/yut/yut-.png"
 
-        self.rotateTime             = SDL_GetTicks()
         self.moveTime               = SDL_GetTicks()
         self.PolygonDegree          = 0
         self.PolygonX               = [[0 for j in range(0, 5)] for i in range(0, 5)]
@@ -48,7 +47,6 @@ class Background:
         pass
 
     def update(self):
-        if(SDL_GetTicks() - self.moveTime > 10):
             for i in range(0, 5):
                 for j in range(0, 5):
                     if(self.PolygonX[i][j] > self.screenSizeX+100 or self.PolygonX[i][j] < -self.screenSizeX+400):
@@ -58,12 +56,9 @@ class Background:
 
                     self.PolygonX[i][j] += self.moveX[i][j]
                     self.PolygonY[i][j] += self.moveY[i][j]
-            self.moveTime = SDL_GetTicks()
 
-        if(SDL_GetTicks() - self.rotateTime > 15):
             self.PolygonDegree += 0.02
-            self.rotateTime = SDL_GetTicks()
-        pass
+
 
     def draw(self):
         self.background.draw(0, 0)

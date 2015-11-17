@@ -31,7 +31,7 @@ def exit():
     pass
 
 def update():
-    background.update()
+    #background.update()
     hero.update()
     map.update()
     #delay(0.014)
@@ -39,7 +39,7 @@ def update():
 
 def draw():
     clear_canvas()
-    background.draw()
+    #background.draw()
     #map.draw()
     hero.draw()
 

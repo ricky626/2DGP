@@ -20,6 +20,7 @@ class Map:
         self.objectX    = [[0 for row in range(0, 16)] for col in range(0, 12)]
         self.objectY    = [[0 for row in range(0, 16)] for col in range(0, 12)]
 
+        
         if(Map.flag == None):
             #self.hero       = load_image("res/hero/right_stand.png")
             Map.flag       = load_image("res/hero/flag.png")
@@ -60,8 +61,10 @@ class Map:
                     #self.objectY[i][j] += 10
                     self.HeroX = self.objectX[i][j]
                     self.HeroY = self.objectY[i][j]
+                elif(self.object[i][j] == 8):
+                    self.EndX = self.objectX[i][j]
+                    self.EndY = self.objectY[i][j]
         pass
-
     def LoadMap(self, m_nStage):
         f = open(self.name.replace('-', str(m_nStage)), 'r')
 
