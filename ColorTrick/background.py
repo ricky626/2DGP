@@ -63,9 +63,9 @@ class Background:
     def draw(self):
         self.background.draw(0, 0)
 
-        for i in range(0, 5):
-             for j in range(0, 5):
-                 self.Polygon[i][j].rotate_draw(self.PolygonDegree, self.PolygonX[i][j], self.PolygonY[i][j])
-                 #self.Polygon[i][j].draw(self.PolygonX[i][j], self.PolygonY[i][j])
-                 pass
+        # for i in range(0, 5):
+        #      for j in range(0, 5):
+        #          self.Polygon[i][j].rotate_draw(self.PolygonDegree, self.PolygonX[i][j], self.PolygonY[i][j])
+        #          #self.Polygon[i][j].draw(self.PolygonX[i][j], self.PolygonY[i][j])
+        #          pass
         pass
