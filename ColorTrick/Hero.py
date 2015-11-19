@@ -164,6 +164,8 @@ class Hero:
     def update(self):
         if(self.holdState):
             return
+
+
         if(self.Charview == False):
             if(self.laserTime == 0):
                 self.laserTime = SDL_GetTicks()

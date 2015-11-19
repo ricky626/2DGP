@@ -50,6 +50,8 @@ def open_canvas(w=int(1024), h=int(768), sync=False):
     ret = Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024)
     if -1 == ret:
         print('WARNING: Audio functions are disabled due to speaker or sound problems')
+    else:
+        audio_on = True
 
 
     if audio_on:
@@ -262,8 +264,8 @@ class Image:
 def load_image(name):
     texture = IMG_LoadTexture(renderer, name.encode('UTF-8'))
     if (not texture):
-	    print('cannot load %s' % name)
-	    raise IOError
+        print('cannot load %s' % name)
+        raise IOError
 
     image = Image(texture)
     return image
@@ -379,6 +381,10 @@ def load_wav(name):
     else:
         print('audio fuctions cannot work due to sound or speaker problems')
         raise IOError
+
+
+
+
 
 
 
