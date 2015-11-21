@@ -48,25 +48,25 @@ class Background:
         pass
 
     def update(self):
-            # for i in range(0, 5):
-            #     for j in range(0, 5):
-            #         if(self.PolygonX[i][j] > self.screenSizeX+100 or self.PolygonX[i][j] < -self.screenSizeX+400):
-            #             self.moveX[i][j] *= -1
-            #         elif(self.PolygonY[i][j] > self.screenSizeY+100 or self.PolygonY[i][j] < -self.screenSizeY+400):
-            #             self.moveY[i][j] *= -1
-            #
-            #         self.PolygonX[i][j] += self.moveX[i][j]
-            #         self.PolygonY[i][j] += self.moveY[i][j]
-            #
-            # self.PolygonDegree += 0.02
+        for i in range(0, 5):
+            for j in range(0, 5):
+                if(self.PolygonX[i][j] > self.screenSizeX+100 or self.PolygonX[i][j] < -self.screenSizeX+400):
+                    self.moveX[i][j] *= -1
+                elif(self.PolygonY[i][j] > self.screenSizeY+100 or self.PolygonY[i][j] < -self.screenSizeY+400):
+                    self.moveY[i][j] *= -1
+
+                self.PolygonX[i][j] += self.moveX[i][j]
+                self.PolygonY[i][j] += self.moveY[i][j]
+
+        self.PolygonDegree += 0.02
         pass
 
     def draw(self):
         self.background.draw(0, 0)
 
-        # for i in range(0, 5):
-        #      for j in range(0, 5):
-        #          self.Polygon[i][j].rotate_draw(self.PolygonDegree, self.PolygonX[i][j], self.PolygonY[i][j])
-        #          #self.Polygon[i][j].draw(self.PolygonX[i][j], self.PolygonY[i][j])
-        #          pass
+        for i in range(0, 5):
+             for j in range(0, 5):
+                 self.Polygon[i][j].rotate_draw(self.PolygonDegree, self.PolygonX[i][j], self.PolygonY[i][j])
+                 #self.Polygon[i][j].draw(self.PolygonX[i][j], self.PolygonY[i][j])
+                 pass
         pass
