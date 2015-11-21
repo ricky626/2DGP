@@ -54,6 +54,21 @@ class Hero:
             Hero.right_jump         = load_image("res/hero/right_jump.png")
             Hero.hold               = load_image("res/menu/hold.png")
             Hero.laser              = load_image("res/hero/laser.png")
+
+            Hero.tutorial_image1       = load_image("res/tutorial/tu1.png")
+            Hero.tutorial_image2       = load_image("res/tutorial/tu2.png")
+            Hero.tutorial_image3       = load_image("res/tutorial/tu3.png")
+            Hero.tutorial_image4       = load_image("res/tutorial/tu4.png")
+
+            Hero.jump_sound = load_wav("res/sound/jump.wav")
+            Hero.jump_sound.set_volume(32)
+
+            Hero.switch_sound = load_wav("res/sound/switch.wav")
+            Hero.switch_sound.set_volume(70)
+
+            Hero.reset_sound = load_wav("res/sound/reset.wav")
+            Hero.reset_sound.set_volume(32)
+            Hero.reset_sound.play()
         pass
 
     def CrashDetection(self, x, y):
@@ -81,9 +96,6 @@ class Hero:
 
                     if(tmpX + 20 <= x and tmpX + 40 >= x and (tmpY + 80 > y and tmpY + tmpMX < y - 2)):
                         return 1
-        #print(int(XTile), int(YTile))
-
-        #print(self.map.objectX[11][0]/64, self.map.objectY[11][0]/64)
         return 0
 
     def SwitchDetection(self, x, y):
@@ -121,6 +133,8 @@ class Hero:
 
                         elif(self.map.object[i][j] == self.SwitchNo + (self.map.RED_ON_SWITCH - self.map.RED_BLOCK)):
                             self.map.object[i][j] = self.SwitchNo + (self.map.RED_OFF_SWITCH - self.map.RED_BLOCK)
+
+                        self.switch_sound.play()
 
                         return 1
 
@@ -235,6 +249,8 @@ class Hero:
                             self.CharState = self.LEFT_JUMP
                         elif(self.CharState == self.RIGHT_RUN or self.CharState == self.RIGHT_STAND):
                             self.CharState = self.RIGHT_JUMP
+                        self.jump_sound.play()
+
 
         if(self.CharState == self.LEFT_JUMP or self.CharState == self.RIGHT_JUMP):
             if(SDL_GetTicks() - self.jumpAnimationTime > 40):
@@ -280,9 +296,20 @@ class Hero:
 
         pass
 
+    def tutorial_draw(self):
+        self.tutorial_image1.draw(252, 500)
+        self.tutorial_image2.draw(400, 400)
+        self.tutorial_image3.draw(300, 300)
+
+        if(self.map.object[8][8] != 14):
+            self.tutorial_image4.draw(700, 370)
+
     def draw(self):
 
         self.map.draw()
+        if(self.map.Stage_number == 1):
+            self.tutorial_draw()
+
         if(self.Charview == False):
             self.laser.clip_draw(self.laser_frames * 64, 0, 64, 768, self.HeroX - 17, self.HeroY - 720)
         else:
@@ -321,6 +348,7 @@ class Hero:
         self.upbutton = False
         self.downbutton = False
         self.JumpButton = False
+        self.reset_sound.play()
         pass
 
     def handle_events(self,event):

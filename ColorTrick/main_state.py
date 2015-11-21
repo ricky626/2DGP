@@ -13,13 +13,17 @@ name        = "MainState"
 hero        = None
 background  = None
 map         = None
+bgm         = None
 
 def enter():
-    global background, map, hero
+    global background, map, hero, bgm
     background          = Background()
     map                 = Map()
     hero                = Hero()
 
+    bgm = load_music("res/sound/필드.wav")
+    bgm.set_volume(64)
+    bgm.repeat_play()
     pass
 
 def exit():

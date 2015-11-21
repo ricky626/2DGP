@@ -50,9 +50,9 @@ class Background:
     def update(self):
         for i in range(0, 5):
             for j in range(0, 5):
-                if(self.PolygonX[i][j] > self.screenSizeX+100 or self.PolygonX[i][j] < -self.screenSizeX+400):
+                if(self.PolygonX[i][j] > self.screenSizeX+200 or self.PolygonX[i][j] < -self.screenSizeX+400):
                     self.moveX[i][j] *= -1
-                elif(self.PolygonY[i][j] > self.screenSizeY+100 or self.PolygonY[i][j] < -self.screenSizeY+400):
+                elif(self.PolygonY[i][j] > self.screenSizeY+200 or self.PolygonY[i][j] < -self.screenSizeY+400):
                     self.moveY[i][j] *= -1
 
                 self.PolygonX[i][j] += self.moveX[i][j]

@@ -6,23 +6,26 @@ from background import Background
 
 name = "StartState"
 image = None
+bgm = None
 frames = 0
 Timer = SDL_GetTicks()
 
 def enter():
-    global image
-    global background
+    global background, image, bgm
     open_canvas(1024, 768)
     hide_lattice()
 
     background = Background()
     image = load_image('res/menu/colortrick.png')
+    bgm = load_music('res/sound/메인메뉴.wav')
+    bgm.set_volume(64)
+    bgm.repeat_play()
 
 def exit():
-    global background
-    global image
+    global background, image, bgm
     del(background)
     del(image)
+    del(bgm)
 
 def update():
     global frames
