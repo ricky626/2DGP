@@ -396,7 +396,7 @@ def test_pico2d():
     print('done')
 
 
-print("Pico2d is prepared.")
+print("My_Pico2d is prepared.")
 if __name__ == "__main__":
     test_pico2d()
 

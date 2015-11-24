@@ -307,7 +307,7 @@ class Hero:
     def draw(self):
 
         self.map.draw()
-        if(self.map.Stage_number == 1):
+        if(self.map.Stage_number == 0):
             self.tutorial_draw()
 
         if(self.Charview == False):
@@ -373,7 +373,7 @@ class Hero:
                 pass
 
             if event.key == SDLK_1:
-                if(self.map.Stage_number > 1):
+                if(self.map.Stage_number > 0):
                     self.LoadStage(self.map.Stage_number - 1)
                 pass
             elif event.key == SDLK_2:
