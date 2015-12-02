@@ -16,7 +16,7 @@ class Map:
     TILE_SIZE = 64
 
     def __init__(self):
-        self.Stage_number       = 1
+        self.Stage_number       = 0
         self.object         = [[0 for row in range(0, self.WIDTH)] for col in range(0, self.WIDTH)]
         self.dot_frames     = 0
         self.flag_frames    = 0
