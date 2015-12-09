@@ -31,7 +31,7 @@ def get_canvas_height():
     return canvas_height
 
 
-def open_canvas(w=int(1024), h=int(768), sync=False):
+def open_canvas(w=int(1024), h=int(768), sync=True):
     global window, renderer
     global canvas_width, canvas_height
     global debug_font

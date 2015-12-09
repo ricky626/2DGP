@@ -85,10 +85,10 @@ def run(start_state):
     running = True
     stack = [start_state]
     start_state.enter()
-    current_time = time.clock()
+    #current_time = time.clock()
     while (running):
-        if time.clock() - current_time > runspeed:
-            current_time = time.clock()
+        #if time.clock() - current_time > runspeed:
+        #    current_time = time.clock()
             stack[-1].handle_events()
             stack[-1].update()
             stack[-1].draw()

@@ -378,10 +378,12 @@ class Hero:
                 pass
             elif event.key == SDLK_2:
                 self.LoadStage(self.map.Stage_number + 1)
+                print(self.map.Stage_number)
                 pass
 
             if event.key == SDLK_r:
                 self.LoadStage(self.map.Stage_number)
+                print(self.map.Stage_number)
                 pass
 
 
